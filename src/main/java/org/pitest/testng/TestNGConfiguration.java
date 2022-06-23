@@ -50,7 +50,8 @@ public class TestNGConfiguration implements Configuration {
     try {
       Class.forName("org.testng.annotations.Test");
     } catch (NoClassDefFoundError | ClassNotFoundException er) {
-      return Optional.ofNullable(new PitHelpError(Help.NO_TEST_LIBRARY));
+      // wrong error here, but need an update in pitest to correct
+      return Optional.ofNullable(new PitHelpError(Help.NO_JUNIT));
     }
 
     return Optional.empty();

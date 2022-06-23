@@ -20,9 +20,14 @@ import com.example.testng.AnnotatedAtMethodLevel;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.pitest.testapi.NullExecutionListener;
 import org.pitest.testapi.TestGroupConfig;
-import java.util.Collections;
+import org.pitest.testapi.TestUnit;
 
+import java.util.Collections;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestNGTestUnitFinderTest {
@@ -38,23 +43,26 @@ public class TestNGTestUnitFinderTest {
 
   @Test
   public void shouldFindSingleTestUnitForAllPublicMethodsInAnnotatedClass() {
-    assertEquals(1, this.testee.findTestUnits(AnnotatedAtClassLevel.class)
-        .size());
+    assertThat(findTestsFor(AnnotatedAtClassLevel.class)).hasSize(1);
   }
 
   @Test
   public void shouldFindSingleTestUnitClassWithAnnotatedMethods() {
-    assertEquals(1, this.testee.findTestUnits(AnnotatedAtMethodLevel.class)
-        .size());
+    assertThat(findTestsFor(AnnotatedAtMethodLevel.class)).hasSize(1);
   }
 
   @Test
   public void shouldFindNoTestUnitsInUnannotatedClasses() {
-    assertEquals(0, this.testee.findTestUnits(String.class).size());
+    assertThat(findTestsFor(String.class)).isEmpty();
   }
 
   @Test
   public void shouldIgnoreAbstractClasses() {
-    assertEquals(0, this.testee.findTestUnits(AbstractTestNGClass.class).size());
+    assertThat(findTestsFor(AbstractTestNGClass.class)).isEmpty();
   }
+
+  private List<TestUnit> findTestsFor(Class<?> clazz) {
+    return this.testee.findTestUnits(clazz, new NullExecutionListener());
+  }
+
 }

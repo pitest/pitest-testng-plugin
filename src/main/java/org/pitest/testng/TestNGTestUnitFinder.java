@@ -19,6 +19,7 @@ import org.pitest.reflection.IsAnnotatedWith;
 import org.pitest.reflection.Reflection;
 import org.pitest.testapi.TestGroupConfig;
 import org.pitest.testapi.TestUnit;
+import org.pitest.testapi.TestUnitExecutionListener;
 import org.pitest.testapi.TestUnitFinder;
 
 import java.lang.reflect.Modifier;
@@ -37,7 +38,7 @@ public class TestNGTestUnitFinder implements TestUnitFinder {
   }
 
   @Override
-  public List<TestUnit> findTestUnits(final Class<?> clazz) {
+  public List<TestUnit> findTestUnits(final Class<?> clazz, TestUnitExecutionListener unused) {
     if (!isAbstract(clazz) && (hasClassAnnotation(clazz) || hasMethodAnnotation(clazz))) {
       return Collections.singletonList(new TestNGTestUnit(clazz, this.config, this.includedTestMethods));
     }
