@@ -6,7 +6,8 @@ Adds support to pitest for TestNg
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.pitest/pitest-testng-plugin/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/org.pitest/pitest-testng-plugin)
 
-* 0.1 requires pitest 1.7.6 or above
+* 0.2.0 requires pitest 1.9.0 or above
+* 0.1 requires a pitest version between 1.7.6 and 1.8.1 
 
 ## Usage
 
