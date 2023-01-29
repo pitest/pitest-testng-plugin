@@ -2,6 +2,8 @@
 
 Adds support to pitest for TestNg
 
+**Note, this repository is looking for a maintainer. Please get in touch if you use TestNG with pitest and would like to improve support**
+
 ## Versions
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.pitest/pitest-testng-plugin/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/org.pitest/pitest-testng-plugin)
