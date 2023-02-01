@@ -135,9 +135,19 @@ class FailFast implements IInvokedMethodListener {
 
   @Override
   public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
-    if (this.listener.hasHadFailure()) {
+    if (this.listener.hasHadFailure() && notAfterConfiguration(method)) {
       throw new SkipException("Skipping");
     }
+  }
+  
+  private boolean notAfterConfiguration(IInvokedMethod method) {
+    ITestNGMethod testMethod = method.getTestMethod();
+    boolean flag = testMethod.isAfterClassConfiguration()
+        || testMethod.isAfterMethodConfiguration()
+        || testMethod.isAfterGroupsConfiguration()
+        || testMethod.isAfterSuiteConfiguration()
+        || testMethod.isAfterTestConfiguration();
+    return !flag;
   }
 
   @Override
